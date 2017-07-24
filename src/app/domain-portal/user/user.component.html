@@ -1,0 +1,11 @@
+<div class="user-list ui divided selection list">
+  <div class="item" *ngFor="let user of userList">
+    <div class="content">
+      {{user.email}}
+    </div>
+  </div>
+</div>
+
+<app-float-button (btnClick)="addUser()">
+  <i class="plus icon"></i>
+</app-float-button>

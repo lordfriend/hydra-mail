@@ -1,0 +1,9 @@
+<a class="back-button" *ngIf="backRoute" [routerLink]="backRoute">
+  <i class="left arrow icon"></i>
+</a>
+<div class="actionbar-title">
+  <ng-content select=".action-title"></ng-content>
+</div>
+<div class="actionbar-right">
+  <ng-content select=".right-control"></ng-content>
+</div>

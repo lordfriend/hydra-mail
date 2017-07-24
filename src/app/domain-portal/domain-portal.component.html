@@ -1,0 +1,21 @@
+<app-action-bar backRoute="/">
+  <div class="action-title">Edit: {{domain?.name}}</div>
+</app-action-bar>
+<div class="ui container main-content" *ngIf="domain">
+  <div class="ui secondary pointing menu">
+    <a class="item" [ngClass]="{active: currentTabIndex === 0}" (click)="switchTab(0)">User</a>
+    <a class="item" [ngClass]="{active: currentTabIndex === 1}" (click)="switchTab(1)">DKIM</a>
+    <a class="item" [ngClass]="{active: currentTabIndex === 2}" (click)="switchTab(2)">BCC</a>
+    <a class="item" [ngClass]="{active: currentTabIndex === 3}" (click)="switchTab(3)">Alias</a>
+    <a class="item" [ngClass]="{active: currentTabIndex === 4}" (click)="switchTab(4)">Transport</a>
+  </div>
+  <div class="tab-content">
+    <div class="ui segment">
+      <app-user [domain_id]="domain.id" *ngIf="currentTabIndex === 0"></app-user>
+      <app-dkim [domain_id]="domain.id" *ngIf="currentTabIndex === 1"></app-dkim>
+      <app-bcc [domain_id]="domain.id" *ngIf="currentTabIndex === 2"></app-bcc>
+      <app-alias [domain_id]="domain.id" *ngIf="currentTabIndex === 3"></app-alias>
+      <app-transport [domain_id]="domain.id" *ngIf="currentTabIndex === 4"></app-transport>
+    </div>
+  </div>
+</div>

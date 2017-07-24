@@ -1,0 +1,21 @@
+<table class="ui very basic table">
+  <thead>
+  <tr>
+    <th>Source</th>
+    <th>Destination</th>
+    <th>Selector</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let transport of transportList">
+    <td>{{transport.source}}</td>
+    <td>{{transport.destination}}</td>
+    <td>{{transport.region}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<app-float-button (btnClick)="addTransport()">
+  <i class="plus icon"></i>
+</app-float-button>
+

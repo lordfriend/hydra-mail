@@ -1,0 +1,31 @@
+@import "../../assets/variables.less";
+
+:host {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: @actionbarHeight;
+  z-index: 120;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.back-button {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #4f4f4f;
+  padding: 1rem;
+}
+
+.actionbar-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #383838;
+  margin-left: 1.5rem;
+}

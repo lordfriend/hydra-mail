@@ -1,0 +1,20 @@
+<table class="ui very basic table">
+  <thead>
+  <tr>
+    <th>Source</th>
+    <th>Destination</th>
+    <th>Selector</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let bcc of bccList">
+    <td>{{bcc.source}}</td>
+    <td>{{bcc.destination}}</td>
+    <td>{{bcc.region}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<app-float-button (btnClick)="addBcc()">
+  <i class="plus icon"></i>
+</app-float-button>

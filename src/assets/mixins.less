@@ -1,0 +1,17 @@
+.app-frame {
+  display: block;
+  box-sizing: border-box;
+  position: fixed;
+  top: @actionbarHeight;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: @appBackground;
+  overflow: hidden;
+  @media(max-width: 767px) {
+    & > .ui.container {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
+}

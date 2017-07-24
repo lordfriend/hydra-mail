@@ -1,0 +1,18 @@
+<table class="ui very basic table">
+  <thead>
+  <tr>
+    <th>Source</th>
+    <th>Destination</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let alias of aliasList">
+    <td>{{alias.source}}</td>
+    <td>{{alias.destination}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<app-float-button (btnClick)="addAlias()">
+  <i class="plus icon"></i>
+</app-float-button>

@@ -1,0 +1,29 @@
+<p>
+  DomainKeys Identified Mail (DKIM) is a method for E-mail authentication, allowing a person who receives email to verify that the message actually comes from the domain that it claims to have come from. The need for this type of authentication arises because spam often has forged headers.
+
+  DKIM uses public-key cryptography to allow the sender to electronically sign legitimate emails in a way that can be verified by recipients.
+
+  DKIM also guards against tampering with mail, offering almost end-to-end integrity from a signing to a verifying Mail transfer agent (MTA).
+</p>
+<h3 class="header">Current DKIM Settings</h3>
+<table class="ui very basic table" *ngIf="currentDkimRecord">
+  <tbody>
+  <tr>
+    <td>Domain</td>
+    <td>{{currentDkimRecord.domain}}</td>
+  </tr>
+  <tr>
+    <td>Selector</td>
+    <td>{{currentDkimRecord.selector}}</td>
+  </tr>
+  <tr>
+    <td>Fingerprints(sha512)</td>
+    <td style="word-break: break-all;">{{currentDkimRecord.key_sha512}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<app-float-button (btnClick)="editDkim()">
+  <i class="write icon"></i>
+</app-float-button>
+

@@ -4,6 +4,19 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
+### Proxy config
+add a file `proxy.conf.json` which content should like this:
+```json
+{
+  "/api": {
+    "target": "http://localhost:3000",
+    "changeOrigin": true,
+    "secure": false
+  }
+}
+```
+for more information, see: https://github.com/angular/angular-cli/wiki/stories-proxy
+
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding

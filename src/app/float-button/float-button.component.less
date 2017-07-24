@@ -1,0 +1,23 @@
+.float-button-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  @media (max-width: 767px) {
+    & > .ui.container {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  }
+}
+
+.ui.container {
+  text-align: right;
+}
+.float-button {
+  margin: 0 1.5rem 2rem 0;
+  font-size: 1.2rem;
+  &.ui.blue.button {
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+  }
+}

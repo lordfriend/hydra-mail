@@ -1,0 +1,16 @@
+<app-action-bar>
+  <div class="action-title">Home</div>
+</app-action-bar>
+<div class="ui container">
+  <div class="domain-list" *ngIf="domainList && domainList.length > 0">
+    <div class="ui segment" *ngFor="let domain of domainList" [routerLink]="'/' + domain.id">
+      <h4>
+        {{domain.name}}
+      </h4>
+    </div>
+  </div>
+  <div class="ui active loader" *ngIf="!domainList"></div>
+  <div class="empty-placeholder" *ngIf="domainList && domainList.length === 0">
+    No Domain Here
+  </div>
+</div>
