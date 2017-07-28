@@ -1,0 +1,14 @@
+<div class="dialog-action-bar" (click)="back()">
+  <div class="back-button">
+    <i class="left arrow icon"></i>
+  </div>
+  <div class="title">
+    <ng-content select=".action-title"></ng-content>
+  </div>
+  <div class="action-right">
+    <ng-content select=".action-control"></ng-content>
+  </div>
+</div>
+<div class="dialog-content">
+  <ng-content select=".content-wrapper"></ng-content>
+</div>

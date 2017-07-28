@@ -1,0 +1,31 @@
+<app-dialog-frame>
+  <div class="action-title">
+    Add User
+  </div>
+  <a class="action-control">
+    <i class="checkmark icon"></i>
+    Done
+  </a>
+  <div class="content-wrapper">
+    <form class="ui form" [formGroup]="userForm">
+      <div class="ui message">
+        Please add your user (e.g. john@{{domain.name}}) and Password, password should contains at least 8 characters.
+      </div>
+      <div class="field">
+        <label>Username</label>
+        <div class="ui right labeled input">
+          <input formControlName="username">
+          <div class="ui label">@{{domain.name}}</div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <app-password-field formControlName="password"></app-password-field>
+      </div>
+      <div class="field">
+        <label>Repeat Password</label>
+        <app-password-field formControlName="repeat_password"></app-password-field>
+      </div>
+    </form>
+  </div>
+</app-dialog-frame>

@@ -1,0 +1,22 @@
+<app-dialog-frame>
+  <div class="action-title">Add Domain</div>
+  <div class="content-wrapper">
+    <form class="ui form" [formGroup]="domainForm">
+      <div class="ui message">
+        Please add your domain (like example.com)
+      </div>
+      <div class="field">
+        <label>Domain Name</label>
+        <input formControlName="domain" placeholder="e.g. example.com">
+      </div>
+    </form>
+
+    <div class="ui message warning" *ngIf="domainForm.invalid && domainForm.touched">
+      Domain name must not be empty.
+    </div>
+  </div>
+  <a class="action-control" (click)="save()">
+    <i class="checkmark icon"></i>
+    Done
+  </a>
+</app-dialog-frame>

@@ -27,6 +27,10 @@ import { RouteGuard } from './authentication/route-guard';
 import { UIModule } from 'deneb-ui';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FloatButtonComponent } from './float-button/float-button.component';
+import { DialogFrameComponent } from './dialog-frame/dialog-frame.component';
+import { AddDomainComponent } from './domain-list/add-domain/add-domain.component';
+import { AddUserComponent } from './domain-portal/user/add-user/add-user.component';
+import { PasswordFieldComponent } from './password-field/password-field.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,11 @@ import { FloatButtonComponent } from './float-button/float-button.component';
     AliasComponent,
     TransportComponent,
     DomainListComponent,
-    FloatButtonComponent
+    FloatButtonComponent,
+    DialogFrameComponent,
+    AddDomainComponent,
+    AddUserComponent,
+    PasswordFieldComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -69,7 +77,11 @@ import { FloatButtonComponent } from './float-button/float-button.component';
     RouteGuard
   ],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent]
+  entryComponents: [
+    LoginComponent,
+    AddDomainComponent,
+    AddUserComponent
+  ]
 })
 export class AppModule {
 }

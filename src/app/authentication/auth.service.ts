@@ -55,6 +55,9 @@ export class AuthService {
             level: window.localStorage.getItem('account_info.level'),
             token: token
           });
+        }, () => {
+          this._loginChecked = true;
+          this.invalidStorage();
 
         });
     } else {
@@ -66,10 +69,7 @@ export class AuthService {
   logout(): Observable<any> {
     return this._http.delete(`${this._rootPath}/login`)
       .do(() => {
-        this._accountInfoSubject.next(null);
-        window.localStorage.removeItem('account_info.username');
-        window.localStorage.removeItem('account_info.level');
-        window.localStorage.removeItem('account_info.token');
+        this.invalidStorage();
       });
   }
 
@@ -98,5 +98,12 @@ export class AuthService {
         }
       );
     });
+  }
+
+  private invalidStorage() {
+    window.localStorage.removeItem('account_info.username');
+    window.localStorage.removeItem('account_info.level');
+    window.localStorage.removeItem('account_info.token');
+    this._accountInfoSubject.next(null);
   }
 }

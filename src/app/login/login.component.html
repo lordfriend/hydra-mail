@@ -1,13 +1,17 @@
 <div class="login-container">
-  <form class="ui form" [formGroup]="loginForm" (submit)="onSubmit()">
-    <div class="field">
+  <form class="ui form" [formGroup]="loginForm" (submit)="onSubmit()" [ngClass]="{error: hasError}">
+    <div class="field" [ngClass]="{error: formErrors.username}">
       <label>Username</label>
       <input formControlName="username" placeholder="Username">
     </div>
-    <div class="field">
+    <div class="field" [ngClass]="{error: formErrors.password}">
       <label>Password</label>
-      <input type="password" formControlName="password" placeholder="password">
+      <app-password-field placeholder="password" formControlName="password"></app-password-field>
     </div>
-    <button class="ui button">Login</button>
+    <div class="ui message" *ngIf="hasError" [ngClass]="{error: hasError}">
+      <p *ngIf="formErrors.username">{{formErrors.username}}</p>
+      <p *ngIf="formErrors.password">{{formErrors.password}}</p>
+    </div>
+    <button class="ui button" [disabled]="loginForm.invalid">Login</button>
   </form>
 </div>

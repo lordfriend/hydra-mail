@@ -11,7 +11,7 @@
   </div>
   <div class="tab-content">
     <div class="ui segment">
-      <app-user [domain_id]="domain.id" *ngIf="currentTabIndex === 0"></app-user>
+      <app-user [domain]="domain" *ngIf="currentTabIndex === 0"></app-user>
       <app-dkim [domain_id]="domain.id" *ngIf="currentTabIndex === 1"></app-dkim>
       <app-bcc [domain_id]="domain.id" *ngIf="currentTabIndex === 2"></app-bcc>
       <app-alias [domain_id]="domain.id" *ngIf="currentTabIndex === 3"></app-alias>
