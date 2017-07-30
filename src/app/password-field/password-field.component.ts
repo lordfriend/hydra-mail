@@ -19,7 +19,7 @@ export class PasswordFieldComponent implements OnInit, ControlValueAccessor {
   placeholder = '';
 
   @Input()
-  disabled = false;
+  isDisabled = false;
 
   showPassword = false;
 
@@ -58,6 +58,6 @@ export class PasswordFieldComponent implements OnInit, ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.isDisabled = isDisabled;
   }
 }

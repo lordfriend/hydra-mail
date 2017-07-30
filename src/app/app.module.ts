@@ -34,7 +34,6 @@ import { PasswordFieldComponent } from './password-field/password-field.componen
 import { EditUserComponent } from './domain-portal/user/edit-user/edit-user.component';
 import { CommonEditDialogComponent } from './common-edit-dialog/common-edit-dialog.component';
 import { AppService } from './app.service';
-import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
 import { ConfirmDialogModule } from './confirm-dialog/index';
 
 @NgModule({
@@ -55,13 +54,11 @@ import { ConfirmDialogModule } from './confirm-dialog/index';
     AddUserComponent,
     PasswordFieldComponent,
     EditUserComponent,
-    CommonEditDialogComponent,
-    AlertDialogComponent
+    CommonEditDialogComponent
   ],
   imports: [
     RouterModule.forRoot(
-      appRoutes,
-      {enableTracing: true}
+      appRoutes
     ),
     BrowserModule,
     HttpClientModule,
@@ -92,8 +89,7 @@ import { ConfirmDialogModule } from './confirm-dialog/index';
     AddDomainComponent,
     AddUserComponent,
     EditUserComponent,
-    CommonEditDialogComponent,
-    AlertDialogComponent
+    CommonEditDialogComponent
   ]
 })
 export class AppModule {

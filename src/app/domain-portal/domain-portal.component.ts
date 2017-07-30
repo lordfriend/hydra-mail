@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { DomainService } from './domain.service';
 import { Domain } from '../../entity/domain';
@@ -16,11 +16,22 @@ export class DomainPortalComponent implements OnInit, OnDestroy {
 
   currentTabIndex = 0;
 
-  constructor(private _route: ActivatedRoute, private _domainService: DomainService) {
+  constructor(private _route: ActivatedRoute,
+              private _router: Router,
+              private _domainService: DomainService) {
   }
 
   switchTab(index: number) {
     this.currentTabIndex = index;
+  }
+
+  deleteDomain() {
+    this._subscription.add(
+      this._domainService.deleteDomain(this.domain.id)
+        .subscribe(() => {
+          this._router.navigate(['/']);
+        })
+    );
   }
 
   ngOnInit() {

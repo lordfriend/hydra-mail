@@ -1,5 +1,12 @@
 <app-action-bar backRoute="/">
   <div class="action-title">Edit: {{domain?.name}}</div>
+  <a class="right-control"
+     appConfirmDialog
+     dialogTitle="Delete Domain"
+     [dialogContent]="'Are you sure to delete this domain' + domain?.name + ' ? This cannot be undone.'"
+     (onConfirm)="deleteDomain()">
+    <i class="trash icon"></i>
+  </a>
 </app-action-bar>
 <div class="ui container main-content" *ngIf="domain">
   <div class="ui secondary pointing menu">
