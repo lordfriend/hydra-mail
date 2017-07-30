@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UIDialogRef } from 'deneb-ui';
 
 @Component({
   selector: 'app-dialog-frame',
   templateUrl: './dialog-frame.component.html',
-  styleUrls: ['./dialog-frame.component.less']
+  styleUrls: ['./dialog-frame.component.less'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DialogFrameComponent implements OnInit {
 

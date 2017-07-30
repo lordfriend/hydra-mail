@@ -13,9 +13,9 @@
     <div class="ui segment">
       <app-user [domain]="domain" *ngIf="currentTabIndex === 0"></app-user>
       <app-dkim [domain_id]="domain.id" *ngIf="currentTabIndex === 1"></app-dkim>
-      <app-bcc [domain_id]="domain.id" *ngIf="currentTabIndex === 2"></app-bcc>
-      <app-alias [domain_id]="domain.id" *ngIf="currentTabIndex === 3"></app-alias>
-      <app-transport [domain_id]="domain.id" *ngIf="currentTabIndex === 4"></app-transport>
+      <app-bcc [domain]="domain" *ngIf="currentTabIndex === 2"></app-bcc>
+      <app-alias [domain]="domain" *ngIf="currentTabIndex === 3"></app-alias>
+      <app-transport [domain]="domain" *ngIf="currentTabIndex === 4"></app-transport>
     </div>
   </div>
 </div>

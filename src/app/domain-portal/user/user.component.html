@@ -1,5 +1,5 @@
 <div class="user-list ui divided selection list">
-  <div class="item" *ngFor="let user of userList">
+  <div class="item" *ngFor="let user of userList" (click)="editUser(user)">
     <div class="content">
       {{user.email}}
     </div>

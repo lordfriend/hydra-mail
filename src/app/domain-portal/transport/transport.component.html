@@ -1,4 +1,4 @@
-<table class="ui very basic table">
+<table class="ui very basic selectable table">
   <thead>
   <tr>
     <th>Source</th>
@@ -7,7 +7,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let transport of transportList">
+  <tr *ngFor="let transport of transportList"
+      appConfirmDialog
+      dialogTitle="Delete Transport"
+      [dialogContent]="'Are you sure to delete Transport ' + transport.source + ' to ' + transport.destination + ' ?'"
+      (onConfirm)="deleteTransport(transport)">
     <td>{{transport.source}}</td>
     <td>{{transport.destination}}</td>
     <td>{{transport.region}}</td>

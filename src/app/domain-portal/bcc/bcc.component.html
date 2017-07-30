@@ -1,4 +1,4 @@
-<table class="ui very basic table">
+<table class="ui very basic selectable table">
   <thead>
   <tr>
     <th>Source</th>
@@ -7,7 +7,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let bcc of bccList">
+  <tr *ngFor="let bcc of bccList"
+      appConfirmDialog
+      dialogTitle="Delete BCC"
+      [dialogContent]="'Are you sure to delete BCC ' + bcc.source + ' to ' + bcc.destination + ' ? This cannot be undone.'"
+      (onConfirm)="deleteBcc(bcc)">
     <td>{{bcc.source}}</td>
     <td>{{bcc.destination}}</td>
     <td>{{bcc.region}}</td>

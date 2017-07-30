@@ -31,6 +31,11 @@ import { DialogFrameComponent } from './dialog-frame/dialog-frame.component';
 import { AddDomainComponent } from './domain-list/add-domain/add-domain.component';
 import { AddUserComponent } from './domain-portal/user/add-user/add-user.component';
 import { PasswordFieldComponent } from './password-field/password-field.component';
+import { EditUserComponent } from './domain-portal/user/edit-user/edit-user.component';
+import { CommonEditDialogComponent } from './common-edit-dialog/common-edit-dialog.component';
+import { AppService } from './app.service';
+import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
+import { ConfirmDialogModule } from './confirm-dialog/index';
 
 @NgModule({
   declarations: [
@@ -48,7 +53,10 @@ import { PasswordFieldComponent } from './password-field/password-field.componen
     DialogFrameComponent,
     AddDomainComponent,
     AddUserComponent,
-    PasswordFieldComponent
+    PasswordFieldComponent,
+    EditUserComponent,
+    CommonEditDialogComponent,
+    AlertDialogComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -59,7 +67,8 @@ import { PasswordFieldComponent } from './password-field/password-field.componen
     HttpClientModule,
     ReactiveFormsModule,
     UIModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ConfirmDialogModule
   ],
   providers: [
     {
@@ -74,13 +83,17 @@ import { PasswordFieldComponent } from './password-field/password-field.componen
     AliasService,
     TransportService,
     AuthService,
-    RouteGuard
+    RouteGuard,
+    AppService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     LoginComponent,
     AddDomainComponent,
-    AddUserComponent
+    AddUserComponent,
+    EditUserComponent,
+    CommonEditDialogComponent,
+    AlertDialogComponent
   ]
 })
 export class AppModule {

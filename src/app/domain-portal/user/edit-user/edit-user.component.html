@@ -1,0 +1,38 @@
+<app-dialog-frame>
+  <div class="action-title">
+    Edit User
+  </div>
+  <a class="action-control" (click)="save()">
+    <i class="checkmark icon"></i>
+    Done
+  </a>
+  <div class="content-wrapper">
+    <h3 class="header">Update Password</h3>
+    <form class="ui form" [formGroup]="userForm" [ngClass]="{error: formErrors.password}">
+      <div class="ui message">
+        Update your password password should contains at least 8 characters.
+      </div>
+      <div class="field" [ngClass]="{error: !!formErrors.password}">
+        <label>Password</label>
+        <app-password-field formControlName="password"></app-password-field>
+      </div>
+      <div class="ui error message" *ngIf="!!formErrors.password">
+        <p>{{formErrors.password}}</p>
+      </div>
+    </form>
+    <div class="ui horizontal divider">
+      Dangerous Part
+    </div>
+    <h3 class="header">Delete User</h3>
+    <form class="ui warning form" [formGroup]="deleteConfirmForm">
+      <div class="ui warning message">
+        <p>Delete this user will delete all relation emails and <strong>CANNOT BE UNDONE.</strong></p>
+        <p>To delete this user, please type the user full email address {{user.email}}</p>
+      </div>
+      <div class="field">
+        <input type="text" formControlName="deleteConfirm">
+      </div>
+      <button type="button" class="ui red button" (click)="delete()" [disabled]="deleteConfirmForm.invalid">DELETE USER</button>
+    </form>
+  </div>
+</app-dialog-frame>

@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { UIDialog } from 'deneb-ui';
 import { AddUserComponent } from './add-user/add-user.component';
 import { Domain } from '../../../entity/domain';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 @Component({
   selector: 'app-user',
@@ -24,10 +25,29 @@ export class UserComponent implements OnInit, OnDestroy {
 
   addUser() {
     const dialogRef = this._dialogService.open(AddUserComponent, {
-      stickyDialog: false,
+      stickyDialog: true,
       backdrop: true
     });
     dialogRef.componentInstance.domain = this.domain;
+    this._subscription.add(
+      dialogRef.afterClosed()
+        .filter(result => !!result)
+        .flatMap(() => {
+          return this._userService.listUser(this.domain.id);
+        })
+        .subscribe((userList) => {
+          this.userList = userList;
+        })
+    );
+  }
+
+  editUser(user: User) {
+    const dialogRef = this._dialogService.open(EditUserComponent, {
+      stickyDialog: true,
+      backdrop: true
+    });
+    dialogRef.componentInstance.domain = this.domain;
+    dialogRef.componentInstance.user = user;
     this._subscription.add(
       dialogRef.afterClosed()
         .filter(result => !!result)

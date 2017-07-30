@@ -1,6 +1,6 @@
 @import "../../assets/variables.less";
 
-:host {
+app-dialog-frame {
   width: 425px;
   height: 640px;
   position: absolute;
@@ -55,6 +55,11 @@
     justify-content: flex-end;
     align-items: center;
   }
+  .action-control {
+    cursor: pointer;
+    color: #383838;
+    margin-right: 1rem;
+  }
 }
 
 .dialog-content {
@@ -62,4 +67,8 @@
   overflow-x: hidden;
   overflow-y: auto;
   height: 100%;
+}
+
+.content-wrapper {
+  margin-top: 1rem;
 }

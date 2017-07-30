@@ -2,29 +2,31 @@
   <div class="action-title">
     Add User
   </div>
-  <a class="action-control">
+  <a class="action-control" (click)="save()">
     <i class="checkmark icon"></i>
     Done
   </a>
   <div class="content-wrapper">
-    <form class="ui form" [formGroup]="userForm">
+    <form class="ui form" [formGroup]="userForm" [ngClass]="{error: hasError}">
       <div class="ui message">
         Please add your user (e.g. john@{{domain.name}}) and Password, password should contains at least 8 characters.
       </div>
-      <div class="field">
+      <div class="field" [ngClass]="{error: !!formErrors.username}">
         <label>Username</label>
         <div class="ui right labeled input">
           <input formControlName="username">
           <div class="ui label">@{{domain.name}}</div>
         </div>
       </div>
-      <div class="field">
+      <div class="ui error message" *ngIf="!!formErrors.username">
+        <p>{{formErrors.username}}</p>
+      </div>
+      <div class="field" [ngClass]="{error: !!formErrors.password}">
         <label>Password</label>
         <app-password-field formControlName="password"></app-password-field>
       </div>
-      <div class="field">
-        <label>Repeat Password</label>
-        <app-password-field formControlName="repeat_password"></app-password-field>
+      <div class="ui error message" *ngIf="!!formErrors.password">
+        <p>{{formErrors.password}}</p>
       </div>
     </form>
   </div>

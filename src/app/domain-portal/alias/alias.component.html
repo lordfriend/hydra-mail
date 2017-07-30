@@ -1,4 +1,4 @@
-<table class="ui very basic table">
+<table class="ui very basic selectable table">
   <thead>
   <tr>
     <th>Source</th>
@@ -6,7 +6,11 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let alias of aliasList">
+  <tr *ngFor="let alias of aliasList"
+      appConfirmDialog
+      dialogTitle="Delete Alias"
+      [dialogContent]="'Are you sure to delete Alias ' + alias.source + ' to ' + alias.destination + ' ? This cannot be undone.'"
+      (onConfirm)="deleteAlias(alias)">
     <td>{{alias.source}}</td>
     <td>{{alias.destination}}</td>
   </tr>
