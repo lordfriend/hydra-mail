@@ -53,7 +53,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
           this._toastRef.show('Update user successful');
           this._dialogRef.close('ok');
         }, (resp) => {
-          this._toastRef.show(resp.json().title);
+          this._toastRef.show(resp.error.title);
         })
     );
   }

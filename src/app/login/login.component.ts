@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         .subscribe((info) => {
           this._dialogRef.close(info);
         }, (resp) => {
-          this._toastRef.show(resp.json().title);
+          this._toastRef.show(resp.error.title);
         })
     );
   }
