@@ -1,5 +1,13 @@
 <app-action-bar>
   <div class="action-title">Home</div>
+  <div class="ui top right pointing dropdown right-control" uiDropdown="click">
+    <div class="text">{{accountInfo.username}}</div>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <div class="item" (click)="changePassword()">Change Password</div>
+      <div class="item" (click)="logout()">Logout</div>
+    </div>
+  </div>
 </app-action-bar>
 <div class="ui container">
   <div class="domain-list" *ngIf="domainList && domainList.length > 0">

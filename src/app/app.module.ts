@@ -37,6 +37,7 @@ import { AppService } from './app.service';
 import { ConfirmDialogModule } from './confirm-dialog/index';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { LoginWrapperComponent } from './login/login-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     EditUserComponent,
     CommonEditDialogComponent,
     RegisterComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    LoginWrapperComponent
   ],
   imports: [
     RouterModule.forRoot(

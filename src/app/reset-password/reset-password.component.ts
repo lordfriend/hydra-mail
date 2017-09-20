@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { UIDialogRef, UIToast, UIToastComponent, UIToastRef } from 'deneb-ui';
 import { Subscription } from 'rxjs/Subscription';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -51,6 +51,9 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   state = 'active';
 
+  @Input()
+  cancelable = false;
+
   constructor(private _fb: FormBuilder,
               private _authService: AuthService,
               private _dialogRef: UIDialogRef<ResetPasswordComponent>,
@@ -73,6 +76,10 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
 
   onLogin() {
     this.state = 'inactive';
+  }
+
+  cancel() {
+    this._dialogRef.close('cancel');
   }
 
   onAnimationDone(event: AnimationEvent) {
