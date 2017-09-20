@@ -35,6 +35,8 @@ import { EditUserComponent } from './domain-portal/user/edit-user/edit-user.comp
 import { CommonEditDialogComponent } from './common-edit-dialog/common-edit-dialog.component';
 import { AppService } from './app.service';
 import { ConfirmDialogModule } from './confirm-dialog/index';
+import { RegisterComponent } from './register/register.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import { ConfirmDialogModule } from './confirm-dialog/index';
     AddUserComponent,
     PasswordFieldComponent,
     EditUserComponent,
-    CommonEditDialogComponent
+    CommonEditDialogComponent,
+    RegisterComponent,
+    ResetPasswordComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -89,7 +93,9 @@ import { ConfirmDialogModule } from './confirm-dialog/index';
     AddDomainComponent,
     AddUserComponent,
     EditUserComponent,
-    CommonEditDialogComponent
+    CommonEditDialogComponent,
+    RegisterComponent,
+    ResetPasswordComponent
   ]
 })
 export class AppModule {

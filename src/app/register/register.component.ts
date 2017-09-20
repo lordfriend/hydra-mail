@@ -1,42 +1,42 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UIDialogRef, UIToast, UIToastComponent, UIToastRef } from 'deneb-ui';
 import { AuthService } from '../authentication/auth.service';
 import { Subscription } from 'rxjs/Subscription';
-import { UIDialog, UIDialogRef, UIToast, UIToastComponent, UIToastRef } from 'deneb-ui';
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
-import { RegisterComponent } from '../register/register.component';
-import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.less'],
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.less'],
   animations: [
     trigger('dialogVisibility', [
-      state('register', style({
-        opacity: 0
-      })),
-      state('resetPassword', style({
-        opacity: 0
-      })),
-      state('login', style({
+      state('active', style({
         opacity: 1
       })),
-      transition('login => register', animate('200ms ease-out')),
-      transition('login => resetPassword', animate('200ms ease-out')),
-      transition('* => login', animate('200ms ease-in'))
+      state('inactive', style({
+        opacity: 0
+      })),
+      transition('active => inactive', [
+        animate('200ms ease-out')
+      ]),
+      transition('void => *', [
+        style({opacity: 0}),
+        animate('200ms ease-in')
+      ])
     ])
   ]
 })
-export class LoginComponent implements OnInit, OnDestroy {
-  private _subscription = new Subscription();
+export class RegisterComponent implements OnInit, OnDestroy {
   private _toastRef: UIToastRef<UIToastComponent>;
+  private _subscription = new Subscription();
 
-  loginForm: FormGroup;
+  registerForm: FormGroup;
 
   formErrors = {
     username: '',
-    password: ''
+    password: '',
+    code: '',
   };
 
   validationMessages = {
@@ -45,26 +45,29 @@ export class LoginComponent implements OnInit, OnDestroy {
     },
     password: {
       required: 'password is empty'
+    },
+    code: {
+      required: 'invite code is empty'
     }
   };
 
   hasError = false;
 
-  openWindow = 'login';
+  state = 'active';
 
   constructor(private _fb: FormBuilder,
               private _authService: AuthService,
-              private _dialogRef: UIDialogRef<LoginComponent>,
-              private _dialog: UIDialog,
+              private _dialogRef: UIDialogRef<RegisterComponent>,
               toastService: UIToast) {
     this._toastRef = toastService.makeText();
   }
 
   onSubmit() {
-    const credential = this.loginForm.value;
+    const credential = this.registerForm.value;
     this._subscription.add(
-      this._authService.login(credential.username, credential.password)
+      this._authService.register(credential.username, credential.password, credential.code)
         .subscribe((info) => {
+          this._toastRef.show('Register successful. Please login');
           this._dialogRef.close(info);
         }, (resp) => {
           this._toastRef.show(resp.error.title);
@@ -72,41 +75,24 @@ export class LoginComponent implements OnInit, OnDestroy {
     );
   }
 
-  onRegister() {
-    this.openWindow = 'register';
+  onLogin() {
+    this.state = 'inactive';
   }
 
-  onResetPassword() {
-    this.openWindow = 'resetPassword';
-  }
-
-  onFadeOut(event: AnimationEvent) {
-    if (event.toState === 'register') {
-      const dialogRef = this._dialog.open(RegisterComponent, {stickyDialog: true, backdrop: false});
-      this._subscription.add(
-        dialogRef.afterClosed()
-          .subscribe(() => {
-            this.openWindow = 'login';
-          })
-      );
-    } else if (event.toState === 'resetPassword') {
-      const dialogRef = this._dialog.open(ResetPasswordComponent, {stickyDialog: true, backdrop: false});
-      this._subscription.add(
-        dialogRef.afterClosed()
-          .subscribe(() => {
-            this.openWindow = 'login';
-          })
-      );
+  onAnimationDone(event: AnimationEvent) {
+    if (event.toState === 'inactive') {
+      this._dialogRef.close();
     }
   }
 
   ngOnInit() {
-    this.loginForm = this._fb.group({
+    this.registerForm = this._fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      code: ['', Validators.required]
     });
     this._subscription.add(
-      this.loginForm.valueChanges
+      this.registerForm.valueChanges
         .subscribe(data => {
           this.onValueChanges(data);
         })
@@ -119,11 +105,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private onValueChanges(data?: any): void {
-    if (!this.loginForm) {
+    if (!this.registerForm) {
       return;
     }
     console.log(data);
-    const form = this.loginForm;
+    const form = this.registerForm;
     this.hasError = false;
     for (const field in this.formErrors) {
       if (!this.formErrors.hasOwnProperty(field)) {

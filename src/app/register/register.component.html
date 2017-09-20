@@ -1,5 +1,5 @@
-<div class="login-container" [@dialogVisibility]="openWindow" (@dialogVisibility.done)="onFadeOut($event)">
-  <form class="ui form" [formGroup]="loginForm" (submit)="onSubmit()" [ngClass]="{error: hasError}">
+<div class="login-container" [@dialogVisibility]="state" (@dialogVisibility.done)="onAnimationDone($event)">
+  <form class="ui form" [formGroup]="registerForm" (submit)="onSubmit()" [ngClass]="{error: hasError}">
     <div class="field" [ngClass]="{error: !!formErrors.username}">
       <label>Username</label>
       <input formControlName="username" placeholder="Username">
@@ -8,17 +8,21 @@
       <label>Password</label>
       <app-password-field placeholder="password" formControlName="password"></app-password-field>
     </div>
+    <div class="field" [ngClass]="{error: !!formErrors.code}">
+      <label>Invite Code</label>
+      <input formControlName="code" placeholder="Invite Code">
+    </div>
     <div class="ui error message" *ngIf="hasError">
       <p *ngIf="!!formErrors.username">{{formErrors.username}}</p>
       <p *ngIf="!!formErrors.password">{{formErrors.password}}</p>
+      <p *ngIf="!!formErrors.code">{{formErrors.code}}</p>
     </div>
-    <button class="ui primary button" [disabled]="loginForm.invalid">Login</button>
+    <button class="ui primary button" [disabled]="registerForm.invalid">Register</button>
   </form>
   <div class="ui horizontal divider">
     Or
   </div>
   <div class="footer">
-    <button class="ui button" (click)="onRegister()">Register</button>
-    <button class="ui button" (click)="onResetPassword()">Reset Password</button>
+    <button class="ui button" (click)="onLogin()">Login</button>
   </div>
 </div>
