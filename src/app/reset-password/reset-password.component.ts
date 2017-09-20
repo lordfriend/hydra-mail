@@ -103,7 +103,6 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     if (!this.resetPasswordForm) {
       return;
     }
-    console.log(data);
     const form = this.resetPasswordForm;
     this.hasError = false;
     for (const field in this.formErrors) {

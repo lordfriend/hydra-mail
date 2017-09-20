@@ -39,7 +39,6 @@ export class PasswordFieldComponent implements OnInit, ControlValueAccessor {
 
   onPassChange(event: Event) {
     const input = event.target as HTMLInputElement;
-    console.log(input.value);
     this._valueChangeFn(input.value);
   }
 

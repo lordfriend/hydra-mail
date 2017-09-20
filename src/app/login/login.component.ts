@@ -122,7 +122,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     if (!this.loginForm) {
       return;
     }
-    console.log(data);
     const form = this.loginForm;
     this.hasError = false;
     for (const field in this.formErrors) {

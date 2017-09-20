@@ -108,7 +108,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     if (!this.registerForm) {
       return;
     }
-    console.log(data);
     const form = this.registerForm;
     this.hasError = false;
     for (const field in this.formErrors) {
