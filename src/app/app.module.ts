@@ -38,6 +38,7 @@ import { ConfirmDialogModule } from './confirm-dialog/index';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { LoginWrapperComponent } from './login/login-wrapper.component';
+import { AddTransportComponent } from './domain-portal/transport/add-transport/add-transport.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { LoginWrapperComponent } from './login/login-wrapper.component';
     CommonEditDialogComponent,
     RegisterComponent,
     ResetPasswordComponent,
-    LoginWrapperComponent
+    LoginWrapperComponent,
+    AddTransportComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -91,11 +93,12 @@ import { LoginWrapperComponent } from './login/login-wrapper.component';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    LoginComponent,
     AddDomainComponent,
     AddUserComponent,
-    EditUserComponent,
+    AddTransportComponent,
     CommonEditDialogComponent,
+    EditUserComponent,
+    LoginComponent,
     RegisterComponent,
     ResetPasswordComponent
   ]

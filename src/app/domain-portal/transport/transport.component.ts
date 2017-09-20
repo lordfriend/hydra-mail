@@ -5,6 +5,7 @@ import { Transport } from '../../../entity/transport';
 import { Domain } from '../../../entity/domain';
 import { UIDialog } from 'deneb-ui';
 import { CommonEditDialogComponent } from '../../common-edit-dialog/common-edit-dialog.component';
+import { AddTransportComponent } from './add-transport/add-transport.component';
 
 @Component({
   selector: 'app-transport',
@@ -23,15 +24,11 @@ export class TransportComponent implements OnInit, OnDestroy {
               private _dialogService: UIDialog) { }
 
   addTransport() {
-    const dialogRef = this._dialogService.open(CommonEditDialogComponent, {
+    const dialogRef = this._dialogService.open(AddTransportComponent, {
       stickyDialog: true,
       backdrop: true
     });
-    dialogRef.componentInstance.title = 'Add Alias';
     dialogRef.componentInstance.domain = this.domain;
-    dialogRef.componentInstance.description = `This is only for experienced user who know the system`;
-    dialogRef.componentInstance.fields = ['source', 'destination'];
-    dialogRef.componentInstance.serviceClass = TransportService;
     this._subscription.add(
       dialogRef.afterClosed()
         .filter((result) => !!result)

@@ -1,0 +1,30 @@
+<app-dialog-frame>
+  <div class="action-title">
+    Add Transport
+  </div>
+  <a class="action-control" (click)="save()">
+    <i class="checkmark icon"></i>
+    Done
+  </a>
+  <div class="content-wrapper">
+    <form class="ui form" [formGroup]="formGroup" [ngClass]="{error: hasError}">
+      <div class="ui message">
+        This is only for experienced user who know the system
+      </div>
+      <div class="field">
+        <label>Source</label>
+        <div class="ui right labeled input">
+          <input formControlName="source" placeholder="name or nothing">
+          <div class="ui label">@{{domain.name}}</div>
+        </div>
+      </div>
+      <div class="field" [ngClass]="{error: !!formErrors.destination}">
+        <label>Destination</label>
+        <input formControlName="destination">
+      </div>
+      <div class="ui error message" *ngIf="!!formErrors.destination">
+        <p>{{formErrors.destination}}</p>
+      </div>
+    </form>
+  </div>
+</app-dialog-frame>
