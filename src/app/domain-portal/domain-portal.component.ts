@@ -3,6 +3,8 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { DomainService } from './domain.service';
 import { Domain } from '../../entity/domain';
+import { UIDialog } from 'deneb-ui';
+import { DomainConfigGuideComponent } from './domain-config-guide/domain-config-guide.component';
 
 @Component({
   selector: 'app-domain-portal',
@@ -18,11 +20,16 @@ export class DomainPortalComponent implements OnInit, OnDestroy {
 
   constructor(private _route: ActivatedRoute,
               private _router: Router,
-              private _domainService: DomainService) {
+              private _domainService: DomainService,
+              private _dialogService: UIDialog) {
   }
 
   switchTab(index: number) {
     this.currentTabIndex = index;
+  }
+
+  openHelp() {
+    this._dialogService.open(DomainConfigGuideComponent, {stickyDialog: false, backdrop: true});
   }
 
   deleteDomain() {

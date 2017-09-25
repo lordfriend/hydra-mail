@@ -25,6 +25,15 @@
       <div class="ui error message" *ngIf="!!formErrors.destination">
         <p>{{formErrors.destination}}</p>
       </div>
+      <div class="field" [ngClass]="{error: !!formErrors.region}">
+        <label>Selector</label>
+        <select formControlName="region">
+          <option *ngFor="let server of serverList" [value]="server.server_mark">{{server.server_mark}}</option>
+        </select>
+      </div>
+      <div class="ui error message" *ngIf="!!formErrors.region">
+        <p>{{formErrors.destination}}</p>
+      </div>
     </form>
   </div>
 </app-dialog-frame>

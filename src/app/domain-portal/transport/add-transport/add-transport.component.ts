@@ -20,12 +20,16 @@ export class AddTransportComponent implements OnInit, OnDestroy {
   formGroup: FormGroup;
 
   formErrors = {
-    destination: ''
+    destination: '',
+    region: ''
   };
 
   validationMessages = {
     destination: {
       required: 'destination is empty'
+    },
+    region: {
+      required: 'region not selected'
     }
   };
 
@@ -60,7 +64,8 @@ export class AddTransportComponent implements OnInit, OnDestroy {
 
     this.formGroup = this._fb.group({
       source: [''],
-      destination: ['', Validators.required]
+      destination: ['', Validators.required],
+      region: ['', Validators.required]
     });
 
     this._subscription.add(this.formGroup.valueChanges

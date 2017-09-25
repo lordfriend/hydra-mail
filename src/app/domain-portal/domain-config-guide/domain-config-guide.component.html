@@ -1,0 +1,48 @@
+<app-dialog-frame>
+  <div class="action-title">Help: Config Domain</div>
+  <div class="content-wrapper">
+    <h2>设置域名记录</h2>
+    <p>前往您的域名管理平台，添加以下记录</p>
+    <table class="ui celled table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>TTL</th>
+        <th>Priority</th>
+        <th>Data</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>@</td>
+        <td>MX</td>
+        <td>3600</td>
+        <td>10</td>
+        <td>cn-aliyun-mail.catofes.com</td>
+      </tr>
+      <tr>
+        <td>@</td>
+        <td>MX</td>
+        <td>3600</td>
+        <td>10</td>
+        <td>jp-linode-mail.catofes.com</td>
+      </tr>
+      <tr>
+        <td>@</td>
+        <td>MX</td>
+        <td>3600</td>
+        <td>10</td>
+        <td>sf-do-mail.catofes.com</td>
+      </tr>
+      <tr>
+        <td>@</td>
+        <td>TXT</td>
+        <td>3600</td>
+        <td>N/A</td>
+        <td>v=spf1 include:_spf.catofes.com ~all</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</app-dialog-frame>
