@@ -40,6 +40,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { LoginWrapperComponent } from './login/login-wrapper.component';
 import { AddTransportComponent } from './domain-portal/transport/add-transport/add-transport.component';
 import { DomainConfigGuideComponent } from './domain-portal/domain-config-guide/domain-config-guide.component';
+import { ClientConfigGuideComponent } from './domain-portal/client-config-guide/client-config-guide.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { DomainConfigGuideComponent } from './domain-portal/domain-config-guide/
     ResetPasswordComponent,
     LoginWrapperComponent,
     AddTransportComponent,
-    DomainConfigGuideComponent
+    DomainConfigGuideComponent,
+    ClientConfigGuideComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -98,6 +100,7 @@ import { DomainConfigGuideComponent } from './domain-portal/domain-config-guide/
     AddDomainComponent,
     AddUserComponent,
     AddTransportComponent,
+    ClientConfigGuideComponent,
     CommonEditDialogComponent,
     DomainConfigGuideComponent,
     EditUserComponent,

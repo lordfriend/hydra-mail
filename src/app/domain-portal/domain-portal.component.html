@@ -1,6 +1,6 @@
 <app-action-bar backRoute="/">
   <div class="action-title">Edit: {{domain?.name}}</div>
-  <a class="right-control" (click)="openHelp()">
+  <a *ngIf="!!domain" class="right-control" (click)="openHelp()">
     <i class="help circle icon"></i>
   </a>
   <a class="right-control ui top right pointing dropdown" uiDropdown="click">

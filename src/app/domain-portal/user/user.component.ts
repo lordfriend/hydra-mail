@@ -6,6 +6,7 @@ import { UIDialog } from 'deneb-ui';
 import { AddUserComponent } from './add-user/add-user.component';
 import { Domain } from '../../../entity/domain';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { ClientConfigGuideComponent } from '../client-config-guide/client-config-guide.component';
 
 @Component({
   selector: 'app-user',
@@ -58,6 +59,16 @@ export class UserComponent implements OnInit, OnDestroy {
           this.userList = userList;
         })
     );
+  }
+
+  openHelp(user: User, event: Event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const dialogRef = this._dialogService.open(ClientConfigGuideComponent, {
+      stickyDialog: false,
+      backdrop: true
+    });
+    dialogRef.componentInstance.user = user;
   }
 
   ngOnInit() {

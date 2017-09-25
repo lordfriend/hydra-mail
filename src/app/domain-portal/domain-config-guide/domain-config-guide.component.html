@@ -1,8 +1,8 @@
 <app-dialog-frame>
   <div class="action-title">Help: Config Domain</div>
   <div class="content-wrapper">
-    <h2>设置域名记录</h2>
-    <p>前往您的域名管理平台，添加以下记录</p>
+    <h2>Config your DNS Records</h2>
+    <p>Open your DNS control panel add add following records</p>
     <table class="ui celled table">
       <thead>
       <tr>
@@ -42,7 +42,24 @@
         <td>N/A</td>
         <td>v=spf1 include:_spf.catofes.com ~all</td>
       </tr>
+      <tr *ngIf="!!dkimSetting">
+        <td>{{dkimSetting.selector}}._domainkey</td>
+        <td>TXT</td>
+        <td>3600</td>
+        <td>N/A</td>
+        <td>v=DKIM1; k=rsa; p=
+          <mark>Your Private Key</mark>
+        </td>
+      </tr>
       </tbody>
     </table>
+    <div class="ui warning message" *ngIf="!dkimSetting">
+      <p>It seems you have add an DKIM record. without this your email sending to other email provider may be identified
+        as spam.</p>
+      <p>
+        <a class="link" (click)="goToDKIM()">Go to add an DKIM record.</a>
+      </p>
+    </div>
+    <div class="ui inverted dimmer" [ngClass]="{active: isLoading}"></div>
   </div>
 </app-dialog-frame>

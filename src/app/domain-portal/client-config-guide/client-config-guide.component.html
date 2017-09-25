@@ -1,0 +1,34 @@
+<app-dialog-frame>
+  <div class="action-title">Help: Client Config</div>
+  <div class="content-wrapper">
+    <h2>Configure POP3 client</h2>
+    <p>Use of of the following server as your POP3 server.</p>
+    <p>Use <mark>SSL</mark> for connection security.</p>
+    <p>Port is <mark>995</mark></p>
+    <p>User name is <mark>{{user.email}}</mark></p>
+    <p>Password is your password for this user.</p>
+    <table class="ui celled table">
+      <thead>
+      <tr>
+        <th>Server Domain</th>
+        <th>Region</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let server of serverList">
+        <td>{{server.domain_name}}</td>
+        <td>{{server.region_mark}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <h2>Configure SMTP client</h2>
+    <p>The server choice is the same with POP3. choose one server above as your SMTP server.</p>
+    <p>Use <mark>TLS</mark> for connection security.</p>
+    <p>Port is <mark>587</mark></p>
+    <p>User name is <mark>{{user.email}}</mark></p>
+    <p>Password is your passwor for this user.</p>
+    <div class="ui inverted dimmer" [ngClass]="{active: isLoading}">
+      <div class="ui text loader">Loading</div>
+    </div>
+  </div>
+</app-dialog-frame>

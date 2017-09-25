@@ -29,7 +29,20 @@ export class DomainPortalComponent implements OnInit, OnDestroy {
   }
 
   openHelp() {
-    this._dialogService.open(DomainConfigGuideComponent, {stickyDialog: false, backdrop: true});
+    if (!this.domain) {
+      return;
+    }
+    const dialogRef = this._dialogService.open(DomainConfigGuideComponent, {stickyDialog: false, backdrop: true});
+    dialogRef.componentInstance.domain_id = this.domain.id;
+    this._subscription.add(
+      dialogRef.afterClosed()
+        .filter(result => !!result)
+        .subscribe((result) => {
+          if (result === 'dkim') {
+            this.currentTabIndex = 1;
+          }
+        })
+    );
   }
 
   deleteDomain() {

@@ -1,5 +1,10 @@
 <div class="user-list ui divided selection list">
   <div class="item" *ngFor="let user of userList" (click)="editUser(user)">
+    <div class="right floated content">
+      <a class="anchor-button" (click)="openHelp(user, $event)">
+        <i class="help circle icon"></i>
+      </a>
+    </div>
     <div class="content">
       {{user.email}}
     </div>
