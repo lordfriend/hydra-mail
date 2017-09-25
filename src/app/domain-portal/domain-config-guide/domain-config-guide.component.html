@@ -1,4 +1,4 @@
-<app-dialog-frame>
+<app-dialog-frame size="large">
   <div class="action-title">Help: Config Domain</div>
   <div class="content-wrapper">
     <h2>Config your DNS Records</h2>
@@ -14,26 +14,12 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
+      <tr *ngFor="let server of serverList">
         <td>@</td>
         <td>MX</td>
         <td>3600</td>
         <td>10</td>
-        <td>cn-aliyun-mail.catofes.com</td>
-      </tr>
-      <tr>
-        <td>@</td>
-        <td>MX</td>
-        <td>3600</td>
-        <td>10</td>
-        <td>jp-linode-mail.catofes.com</td>
-      </tr>
-      <tr>
-        <td>@</td>
-        <td>MX</td>
-        <td>3600</td>
-        <td>10</td>
-        <td>sf-do-mail.catofes.com</td>
+        <td>{{server.domain_name}}</td>
       </tr>
       <tr>
         <td>@</td>
@@ -47,8 +33,8 @@
         <td>TXT</td>
         <td>3600</td>
         <td>N/A</td>
-        <td>v=DKIM1; k=rsa; p=
-          <mark>Your Private Key</mark>
+        <td>v=DKIM1; k=rsa; p=<strong><em>Your Public Key, If you forget that,
+          replace the old DKIM record with a new generated key pair</em></strong>
         </td>
       </tr>
       </tbody>
@@ -60,6 +46,8 @@
         <a class="link" (click)="goToDKIM()">Go to add an DKIM record.</a>
       </p>
     </div>
-    <div class="ui inverted dimmer" [ngClass]="{active: isLoading}"></div>
+    <div class="ui inverted dimmer" [ngClass]="{active: isLoading && !serverList}">
+      <div class="ui text loader">Loading</div>
+    </div>
   </div>
 </app-dialog-frame>

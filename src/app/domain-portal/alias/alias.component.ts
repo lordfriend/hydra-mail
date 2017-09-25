@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { AliasService } from './alias.service';
 import { Alias } from '../../../entity/alias';
 import { Domain } from '../../../entity/domain';
-import { UIDialog } from 'deneb-ui';
+import { UIDialog, UIToast, UIToastComponent, UIToastRef } from 'deneb-ui';
 import { CommonEditDialogComponent } from '../../common-edit-dialog/common-edit-dialog.component';
 
 @Component({
@@ -13,14 +13,20 @@ import { CommonEditDialogComponent } from '../../common-edit-dialog/common-edit-
 })
 export class AliasComponent implements OnInit, OnDestroy {
   private _subscription = new Subscription();
+  private _toastRef: UIToastRef<UIToastComponent>;
 
   @Input()
   domain: Domain;
 
   aliasList: Alias[];
 
+  isLoading = true;
+
   constructor(private _aliasService: AliasService,
-              private _dialogService: UIDialog) { }
+              private _dialogService: UIDialog,
+              toast: UIToast) {
+    this._toastRef = toast.makeText();
+  }
 
   addAlias() {
     const dialogRef = this._dialogService.open(CommonEditDialogComponent, {
@@ -37,10 +43,15 @@ export class AliasComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed()
         .filter((result) => !!result)
         .flatMap(() => {
+          this.isLoading = true;
           return this._aliasService.list(this.domain.id);
         })
         .subscribe((aliasList) => {
+          this.isLoading = false;
           this.aliasList = aliasList;
+        }, (resp) => {
+          this.isLoading = false;
+          this._toastRef.show(resp.error.title);
         })
     );
   }
@@ -48,10 +59,15 @@ export class AliasComponent implements OnInit, OnDestroy {
     this._subscription.add(
       this._aliasService.delete(this.domain.id, alias.id)
         .flatMap(() => {
+          this.isLoading = true;
           return this._aliasService.list(this.domain.id);
         })
         .subscribe((aliasList) => {
+          this.isLoading = false;
           this.aliasList = aliasList;
+        }, (resp) => {
+          this.isLoading = false;
+          this._toastRef.show(resp.error.title);
         })
     );
   }
@@ -60,7 +76,11 @@ export class AliasComponent implements OnInit, OnDestroy {
     this._subscription.add(
       this._aliasService.list(this.domain.id)
         .subscribe(aliasList => {
+          this.isLoading = false;
           this.aliasList = aliasList;
+        }, (resp) => {
+          this.isLoading = false;
+          this._toastRef.show(resp.error.title);
         })
     );
   }

@@ -2,6 +2,8 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { DkimService } from '../dkim/dkim.service';
 import { Subscription } from 'rxjs/Subscription';
 import { UIDialogRef } from 'deneb-ui';
+import { AppService } from '../../app.service';
+import { Server } from '../../../entity/server';
 
 @Component({
   selector: 'app-domain-config-guide',
@@ -16,9 +18,13 @@ export class DomainConfigGuideComponent implements OnInit, OnDestroy {
 
   dkimSetting: any;
 
+  serverList: Server[];
+
   isLoading = true;
 
-  constructor(private _dkimService: DkimService, private _dialogRef: UIDialogRef<DomainConfigGuideComponent>) { }
+  constructor(private _dkimService: DkimService,
+              private _appService: AppService,
+              private _dialogRef: UIDialogRef<DomainConfigGuideComponent>) { }
 
   goToDKIM() {
     this._dialogRef.close('dkim');
@@ -32,6 +38,12 @@ export class DomainConfigGuideComponent implements OnInit, OnDestroy {
           this.dkimSetting = setting;
         }, () => {
           this.isLoading = false;
+        })
+    );
+    this._subscription.add(
+      this._appService.listServer()
+        .subscribe((list) => {
+          this.serverList = list;
         })
     );
   }

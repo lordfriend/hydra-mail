@@ -1,3 +1,6 @@
+<div class="ui message">
+  User is an account for an email address. All emails stored in user's space.
+</div>
 <div class="user-list ui divided selection list">
   <div class="item" *ngFor="let user of userList" (click)="editUser(user)">
     <div class="right floated content">
@@ -9,6 +12,9 @@
       {{user.email}}
     </div>
   </div>
+</div>
+<div class="ui inverted dimmer" [ngClass]="{active: isLoading}">
+  <div class="ui text loader">Loading</div>
 </div>
 
 <app-float-button (btnClick)="addUser()">

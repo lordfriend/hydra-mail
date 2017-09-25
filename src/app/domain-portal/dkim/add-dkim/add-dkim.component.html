@@ -1,0 +1,35 @@
+<app-dialog-frame>
+  <div class="action-title">{{title}}</div>
+  <a class="action-control" (click)="save()">
+    <i class="checkmark icon"></i>
+    Done
+  </a>
+  <div class="content-wrapper">
+    <form class="ui form" [formGroup]="dkimForm" [ngClass]="{error: hasError}">
+      <div class="ui message">
+        Choose a selector and generate a public-private key pair using a tool such as ssh-keygen on Linux (<a
+        href="https://help.github.com/articles/generating-ssh-keys" target="_blank">Github has an excellent tutorial</a>)
+        or PuTTYgen on Windows (<a href="https://winscp.net/eng/docs/ui_puttygen" target="_blank">See a tutorial</a>).
+      </div>
+      <div class="field">
+        <label>Selector</label>
+        <input type="text" formControlName="selector" placeholder="suggest a simple word, e.g. key1">
+      </div>
+      <div class="ui error message" *ngIf="!!formErrors.selector">
+        <p>{{formErrors.selector}}</p>
+      </div>
+      <div class="field" [ngClass]="{error: !!formErrors.private_key}">
+        <label>Private Key</label>
+        <textarea name="private_key"
+                  cols="20"
+                  rows="5"
+                  formControlName="private_key"
+                  placeholder="Make sure put your private key here and public key in your DNS record"
+        ></textarea>
+      </div>
+      <div class="ui error message" *ngIf="!!formErrors.private_key">
+        <p>{{formErrors.private_key}}</p>
+      </div>
+    </form>
+  </div>
+</app-dialog-frame>

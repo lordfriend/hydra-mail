@@ -41,6 +41,7 @@ import { LoginWrapperComponent } from './login/login-wrapper.component';
 import { AddTransportComponent } from './domain-portal/transport/add-transport/add-transport.component';
 import { DomainConfigGuideComponent } from './domain-portal/domain-config-guide/domain-config-guide.component';
 import { ClientConfigGuideComponent } from './domain-portal/client-config-guide/client-config-guide.component';
+import { AddDkimComponent } from './domain-portal/dkim/add-dkim/add-dkim.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ClientConfigGuideComponent } from './domain-portal/client-config-guide/
     LoginWrapperComponent,
     AddTransportComponent,
     DomainConfigGuideComponent,
-    ClientConfigGuideComponent
+    ClientConfigGuideComponent,
+    AddDkimComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -97,6 +99,7 @@ import { ClientConfigGuideComponent } from './domain-portal/client-config-guide/
   ],
   bootstrap: [AppComponent],
   entryComponents: [
+    AddDkimComponent,
     AddDomainComponent,
     AddUserComponent,
     AddTransportComponent,

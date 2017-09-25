@@ -17,6 +17,10 @@
   </tbody>
 </table>
 
+<div class="ui inverted dimmer" [ngClass]="{active: isLoading}">
+  <div class="ui text loader">Loading</div>
+</div>
+
 <app-float-button (btnClick)="addAlias()">
   <i class="plus icon"></i>
 </app-float-button>

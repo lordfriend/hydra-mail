@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { UIDialogRef } from 'deneb-ui';
 
 @Component({
@@ -8,6 +8,10 @@ import { UIDialogRef } from 'deneb-ui';
   encapsulation: ViewEncapsulation.None
 })
 export class DialogFrameComponent implements OnInit {
+
+  @Input()
+  @HostBinding('class')
+  size: 'small' | 'large' = 'small';
 
   constructor(private _dialogRef: UIDialogRef<DialogFrameComponent>) {
   }

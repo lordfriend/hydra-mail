@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { BccService } from './bcc.service';
 import { Bcc } from '../../../entity/bbc';
-import { UIDialog } from 'deneb-ui';
+import { UIDialog, UIToast, UIToastComponent, UIToastRef } from 'deneb-ui';
 import { CommonEditDialogComponent } from '../../common-edit-dialog/common-edit-dialog.component';
 import { Domain } from '../../../entity/domain';
 
@@ -13,13 +13,19 @@ import { Domain } from '../../../entity/domain';
 })
 export class BccComponent implements OnInit, OnDestroy {
   private _subscription = new Subscription();
+  private _toastRef: UIToastRef<UIToastComponent>;
 
   @Input()
   domain: Domain;
 
   bccList: Bcc[];
 
-  constructor(private _bccService: BccService, private _dialogService: UIDialog) {
+  isLoading = true;
+
+  constructor(private _bccService: BccService,
+              private _dialogService: UIDialog,
+              toast: UIToast) {
+    this._toastRef = toast.makeText();
   }
 
   addBcc() {
@@ -39,10 +45,15 @@ export class BccComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed()
         .filter((result) => !!result)
         .flatMap(() => {
+          this.isLoading = true;
           return this._bccService.list(this.domain.id);
         })
         .subscribe((bccList) => {
+          this.isLoading = false;
           this.bccList = bccList;
+        }, (resp) => {
+          this.isLoading = false;
+          this._toastRef.show(resp.error.title);
         })
     );
   }
@@ -51,10 +62,15 @@ export class BccComponent implements OnInit, OnDestroy {
     this._subscription.add(
       this._bccService.delete(this.domain.id, bcc.id)
         .flatMap(() => {
+          this.isLoading = true;
           return this._bccService.list(this.domain.id);
         })
         .subscribe((bccList) => {
+          this.isLoading = false;
           this.bccList = bccList;
+        }, (resp) => {
+          this.isLoading = false;
+          this._toastRef.show(resp.error.title);
         })
     );
   }
@@ -63,7 +79,11 @@ export class BccComponent implements OnInit, OnDestroy {
     this._subscription.add(
       this._bccService.list(this.domain.id)
         .subscribe(bccList => {
+          this.isLoading = false;
           this.bccList = bccList;
+        }, (resp) => {
+          this.isLoading = false;
+          this._toastRef.show(resp.error.title);
         })
     );
   }

@@ -102,7 +102,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
     if (!this.userForm) {
       return;
     }
-    console.log(data);
     const form = this.userForm;
     for (const field in this.formErrors) {
       if (!this.formErrors.hasOwnProperty(field)) {

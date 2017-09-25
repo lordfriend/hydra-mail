@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { User } from '../../../entity/user';
 import { UserService } from './user.service';
-import { UIDialog } from 'deneb-ui';
+import { UIDialog, UIToast, UIToastComponent, UIToastRef } from 'deneb-ui';
 import { AddUserComponent } from './add-user/add-user.component';
 import { Domain } from '../../../entity/domain';
 import { EditUserComponent } from './edit-user/edit-user.component';
@@ -15,13 +15,19 @@ import { ClientConfigGuideComponent } from '../client-config-guide/client-config
 })
 export class UserComponent implements OnInit, OnDestroy {
   private _subscription = new Subscription();
+  private _toastRef: UIToastRef<UIToastComponent>;
 
   @Input()
   domain: Domain;
 
   userList: User[];
 
-  constructor(private _userService: UserService, private _dialogService: UIDialog) {
+  isLoading = true;
+
+  constructor(private _userService: UserService,
+              private _dialogService: UIDialog,
+              toast: UIToast) {
+    this._toastRef = toast.makeText();
   }
 
   addUser() {
@@ -34,10 +40,15 @@ export class UserComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed()
         .filter(result => !!result)
         .flatMap(() => {
+          this.isLoading = true;
           return this._userService.listUser(this.domain.id);
         })
         .subscribe((userList) => {
+          this.isLoading = false;
           this.userList = userList;
+        }, (resp) => {
+          this.isLoading = false;
+          this._toastRef.show(resp.error.title);
         })
     );
   }
@@ -53,10 +64,15 @@ export class UserComponent implements OnInit, OnDestroy {
       dialogRef.afterClosed()
         .filter(result => !!result)
         .flatMap(() => {
+          this.isLoading = true;
           return this._userService.listUser(this.domain.id);
         })
         .subscribe((userList) => {
+          this.isLoading = false;
           this.userList = userList;
+        }, (resp) => {
+          this.isLoading = false;
+          this._toastRef.show(resp.error.title);
         })
     );
   }
@@ -74,7 +90,13 @@ export class UserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._subscription.add(
       this._userService.listUser(this.domain.id)
-        .subscribe(userList => this.userList = userList)
+        .subscribe((userList) => {
+          this.isLoading = false;
+          this.userList = userList;
+        }, (resp) => {
+          this.isLoading = false;
+          this._toastRef.show(resp.error.title);
+        })
     );
   }
 
