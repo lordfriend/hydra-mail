@@ -4,6 +4,8 @@ import { UIDialogRef, UIToast, UIToastComponent, UIToastRef } from 'deneb-ui';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Domain } from '../../../../entity/domain';
 import { TransportService } from '../transport.service';
+import { Server } from '../../../../entity/server';
+import { AppService } from '../../../app.service';
 
 @Component({
   selector: 'app-add-transport',
@@ -16,6 +18,8 @@ export class AddTransportComponent implements OnInit, OnDestroy {
 
   @Input()
   domain: Domain;
+
+  serverList: Server[];
 
   formGroup: FormGroup;
 
@@ -36,6 +40,7 @@ export class AddTransportComponent implements OnInit, OnDestroy {
   hasError = false;
 
   constructor(private _transportService: TransportService,
+              private _appService: AppService,
               private _fb: FormBuilder,
               private _dialogRef: UIDialogRef<AddTransportComponent>,
               toast: UIToast) {
@@ -61,6 +66,12 @@ export class AddTransportComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this._subscription.add(
+      this._appService.listServer()
+        .subscribe((list) => {
+          this.serverList = list;
+        })
+    );
 
     this.formGroup = this._fb.group({
       source: [''],
